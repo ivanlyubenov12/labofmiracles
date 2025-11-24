@@ -349,10 +349,13 @@
 </section>
 
 <footer style="font-family: Arial !important;">
+    <h1 id="userOSText">USER OS</h1>
   © 2025 — Всички права запазени
 </footer>
 
 <script>
+    const h1 = document.getElementById("userOSText");
+
     const viewer = document.getElementById('viewer');
     const overlay = document.getElementById('overlay');
     const stopBtn = document.getElementById('stopBtn');
@@ -419,7 +422,7 @@
     exitFsBtn.addEventListener('click', exitFullscreen);
     terminateBtn.addEventListener('click', stopGame);
 
-    
+
     function getOS() {
         const platform = navigator.platform.toLowerCase();
         const ua = navigator.userAgent.toLowerCase();
@@ -442,6 +445,8 @@
             bottomToolbar.style.display = 'none';
             return;
         }
+        console.log(userOS);
+        h1.innerHTML = userOS;
         // Mobile OS => show bottom toolbar as a hint
         if (userOS === 'Android' || userOS === 'iOS') {
             //телефон

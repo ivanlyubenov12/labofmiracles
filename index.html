@@ -1,354 +1,355 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Лаборатория на чудесата</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
-  <link rel="website icon" href="assets/Icon.svg"/>
-  <style>
-    @font-face {
-      font-family: Handvetica Neue;
-      src: url("assets/handvetica_neue.ttf") format("truetype");
-    }
-    body {
-      scroll-behavior: smooth;
-      margin: 0;
-      font-family: Handvetica Neue, sans-serif;
-      scroll-behavior: smooth;
-      background: url("assets/bg.svg") no-repeat center center fixed;
-      background-size: cover;
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Лаборатория на чудесата</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <link rel="website icon" href="assets/Icon.svg"/>
+    <style>
+        @font-face {
+            font-family: Handvetica Neue;
+            src: url("assets/handvetica_neue.ttf") format("truetype");
+        }
+        body {
+            scroll-behavior: smooth;
+            margin: 0;
+            font-family: Handvetica Neue, sans-serif;
+            scroll-behavior: smooth;
+            background: url("assets/bg.svg") no-repeat center center fixed;
+            background-size: cover;
+        }
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      z-index: 1000;
-    }
-    nav a {
-      text-decoration: none;
-      color: #222;
-      font-weight: 600;
-    }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            z-index: 1000;
+        }
+        nav a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 600;
+        }
 
-    section {
-      background: none;
-      padding: 0;
-      min-height: unset;
-      display: block;
-      box-sizing: border-box;
-    }
-    .section-bg {
-      background: rgba(255,255,255,0.7);
-      border-radius: 24px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-      padding: 32px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      max-width: 1400px;
-      width: 95vw;
-      margin: 120px auto 20px auto;
-      box-sizing: border-box;
-    }
-    .text {
-      flex: 1 1 0;
-      min-width: 0;
-    }
-    .text h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-    .text p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-    .media {
-      flex: 1 1 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 0;
-    }
-    .media img {
-      height: 300px;
-      width: auto;
-      object-fit: cover;
-      border-radius: 16px;
-      max-width: 100%;
-    }
+        section {
+            background: none;
+            padding: 0;
+            min-height: unset;
+            display: block;
+            box-sizing: border-box;
+        }
+        .section-bg {
+            background: rgba(255,255,255,0.7);
+            border-radius: 24px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+            padding: 32px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1400px;
+            width: 95vw;
+            margin: 120px auto 20px auto;
+            box-sizing: border-box;
+        }
+        .text {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .text h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .text p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .media {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+        .media img {
+            height: 300px;
+            width: auto;
+            object-fit: cover;
+            border-radius: 16px;
+            max-width: 100%;
+        }
 
-    /* Game card styles */
-    :root {
-      --width: 480px;
-      --aspect: 4/3;
-      --radius: 14px;
-      --bg-toolbar: #e0e0e0;
-      --shadow: 0 6px 18px rgba(0,0,0,0.12);
-      --toolbar-height: 64px;
-    }
-    .card {
-      width: var(--width);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      background: transparent;
-      position: relative;
-      max-width: 100%;
-    }
-    .viewer {
-      width: 100%;
-      aspect-ratio: var(--aspect);
-      position: relative;
-      border-top-left-radius: var(--radius);
-      border-top-right-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: url('assets/overlay.png') center/cover no-repeat;
-    }
-    .overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer;
-      background: rgba(0,0,0,0.3);
-      z-index: 10;
-    }
-    .start-btn {
-      background: white;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .start-btn:hover {
-      transform: scale(1.1);
-    }
-    #terminateBtn {
-      display: none;
-    }
-    .toolbar {
-      height: var(--toolbar-height);
-      background: var(--bg-toolbar);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      border-bottom-left-radius: var(--radius);
-      border-bottom-right-radius: var(--radius);
-    }
-    .controls {
-      display: flex;
-      gap: 10px;
-    }
-    .icon-btn {
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      background: white;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .fullscreen-toolbar {
-      position: fixed;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.65);
-      padding: 12px;
-      border-radius: 14px;
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 99999;
-    }
-    .fullscreen-toolbar .icon-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: white;
-    }
-    footer {
-      padding: 40px;
-      text-align: center;
-      background: #ececec;
-      margin-top: 80px;
-    }
+        /* Game card styles */
+        :root {
+            --width: 480px;
+            --aspect: 4/3;
+            --radius: 14px;
+            --bg-toolbar: #e0e0e0;
+            --shadow: 0 6px 18px rgba(0,0,0,0.12);
+            --toolbar-height: 64px;
+        }
+        .card {
+            width: var(--width);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            position: relative;
+            max-width: 100%;
+        }
+        .viewer {
+            width: 100%;
+            aspect-ratio: var(--aspect);
+            position: relative;
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('assets/overlay.png') center/cover no-repeat;
+        }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 5px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .start-btn {
+            background: white;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .start-btn:hover {
+            transform: scale(1.1);
+        }
+        #terminateBtn {
+            display: none;
+        }
+        .toolbar {
+            height: var(--toolbar-height);
+            background: var(--bg-toolbar);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom-left-radius: var(--radius);
+            border-bottom-right-radius: var(--radius);
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .fullscreen-toolbar {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.65);
+            padding: 12px;
+            border-radius: 14px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 99999;
+        }
+        .fullscreen-toolbar .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+        }
+        footer {
+            padding: 40px;
+            text-align: center;
+            background: #ececec;
+            margin-top: 80px;
+        }
 
-    /* Responsive design */
-    @media (max-width: 1200px) {
-      body{
-        padding-top: 5em;
-      }
-      .section-bg {
-        max-width: 95vw;
-        padding: 12px 6vw;
-        margin: 20px auto;
-      }
-      .media img {
-        height: 300px;
-      }
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            body{
+                padding-top: 5em;
+            }
+            .section-bg {
+                max-width: 95vw;
+                padding: 12px 6vw;
+                margin: 20px auto;
+            }
+            .media img {
+                height: 300px;
+            }
 
-    }
-    @media (max-width: 900px) {
-      body{
-        padding-top: 3em;
-      }
-      nav {
-        height: 48px;
-        gap: 13px;
-      }
-      .section-bg {
-        border-radius: 16px;
-        width: 95vw;
-        padding: 12px 6vw;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 24px;
-        margin: 20px auto;
-        max-width: 95vw;
-      }
-      .text h2 {
-        font-size: 22px;
-      }
-      .text p {
-        font-size: 15px;
-      }
-      .media img {
-        height: 300px;
-      }
-    }
-    @media (max-width: 600px) {
-      body{
-        padding-top: 3em;
-      }
-      nav {
-        height: 48px;
-        gap: 13px;
-      }
-      .section-bg {
-        border-radius: 16px;
-        width: 95vw;
-        max-width: 700px;
-        padding: 12px 6vw;
-        margin: 20px auto;
-      }
-      .text h2 {
-        font-size: 22px;
-      }
-      .text p {
-        font-size: 15px;
-      }
-      .media img {
-        height: 200px;
-      }
-    }
-  </style>
+        }
+        @media (max-width: 900px) {
+            body{
+                padding-top: 3em;
+            }
+            nav {
+                height: 48px;
+                gap: 13px;
+            }
+            .section-bg {
+                border-radius: 16px;
+                width: 95vw;
+                padding: 12px 6vw;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 24px;
+                margin: 20px auto;
+                max-width: 95vw;
+            }
+            .text h2 {
+                font-size: 22px;
+            }
+            .text p {
+                font-size: 15px;
+            }
+            .media img {
+                height: 300px;
+            }
+        }
+        @media (max-width: 600px) {
+            body{
+                padding-top: 3em;
+            }
+            nav {
+                height: 48px;
+                gap: 13px;
+            }
+            .section-bg {
+                border-radius: 16px;
+                width: 95vw;
+                max-width: 700px;
+                padding: 12px 6vw;
+                margin: 20px auto;
+            }
+            .text h2 {
+                font-size: 22px;
+            }
+            .text p {
+                font-size: 15px;
+            }
+            .media img {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <img src="assets/logo.svg" alt="Logo" style="height:40px;"/>
-  <a href="#s1">Начало</a>
-  <a href="#s2">Игра</a>
-  <a href="#s3">За нас</a>
+    <img src="assets/logo.svg" alt="Logo" style="height:40px;"/>
+    <a href="#s1">Начало</a>
+    <a href="#s2">Игра</a>
+    <a href="#s3">За нас</a>
 </nav>
 
 <section id="s1">
-  <div class="section-bg">
-    <div class="text">
-      <h2>Добре дошли в Лаборатория на чудесата!</h2>
-      <p>
-        Тук започва вашето приключение. Играете като г-н Скрачи. Времето е малко. Лабораторията на Чудесата стои на прага на най-голямото откритие в историята – първата напълно функционираща магическа пръчка. Години усилен труд, проучвания и експерименти доведоха до този момент. Всички необходими компоненти са събрани... всички, освен един.
-        Последната и най-важна съставка е специалният кристал от Геометричния свят. Без него пръчката няма да може да задържи и насочи магическата енергия.
-        Затова се обръщаме към Вас. Вие сте избраният за тази мисия.
-      </p>
+    <div class="section-bg">
+        <div class="text">
+            <h2>Добре дошли в Лаборатория на чудесата!</h2>
+            <p>
+                Тук започва вашето приключение. Играете като г-н Скрачи. Времето е малко. Лабораторията на Чудесата стои на прага на най-голямото откритие в историята – първата напълно функционираща магическа пръчка. Години усилен труд, проучвания и експерименти доведоха до този момент. Всички необходими компоненти са събрани... всички, освен един.
+                Последната и най-важна съставка е специалният кристал от Геометричния свят. Без него пръчката няма да може да задържи и насочи магическата енергия.
+                Затова се обръщаме към Вас. Вие сте избраният за тази мисия.
+            </p>
+        </div>
+        <div class="media">
+            <img src="assets/stand 2.svg" alt="Cat" />
+        </div>
     </div>
-    <div class="media">
-      <img src="assets/stand 2.svg" alt="Cat" />
-    </div>
-  </div>
 </section>
 
 <section id="s2">
-  <div class="section-bg">
-    <div class="text">
-      <h2>Играйте тук!</h2>
-      <p>
-        В лабораторията вече е активиран порталът към Геометричния свят. Това е място, различно от всичко, което познаваме – свят, където пространството и формите не следват обичайните правила. Но не бива да се заблуждавате – този свят е изпълнен със загадки, изпитания и капани, създадени да предпазват кристала от натрапници.
-        Вие ще трябва да използвате острия си ум, бързите си рефлекси и находчивостта си, за да намерите кристала и да се върнете обратно невредим. Внимавайте – някои от съществата там не гледат с добро око на външни посетители.
-      </p>
-    </div>
-    <div class="media">
-      <div class="card" id="card">
-        <div class="viewer" id="viewer">
-          <div class="overlay" id="overlay">
-            <h2 style="color:white;">Лаборатория на чудесата</h2>
-              <h3 style="color: white;" id="h3text">Започни игра:</h3>
-            <div class="start-btn"><i class="bi bi-controller" style="font-size:28px;"></i></div>
-          </div>
-          <div class="fullscreen-toolbar" id="fsToolbar">
-            <div class="icon-btn" id="exitFsBtn"><i class="bi bi-fullscreen-exit"></i></div>
-            <div class="icon-btn" id="terminateBtn"><i class="bi bi-stop-fill"></i></div>
-          </div>
+    <div class="section-bg">
+        <div class="text">
+            <h2>Играйте тук!</h2>
+            <p>
+                В лабораторията вече е активиран порталът към Геометричния свят. Това е място, различно от всичко, което познаваме – свят, където пространството и формите не следват обичайните правила. Но не бива да се заблуждавате – този свят е изпълнен със загадки, изпитания и капани, създадени да предпазват кристала от натрапници.
+                Вие ще трябва да използвате острия си ум, бързите си рефлекси и находчивостта си, за да намерите кристала и да се върнете обратно невредим. Внимавайте – някои от съществата там не гледат с добро око на външни посетители.
+            </p>
         </div>
-        <div class="toolbar">
-          <div class="title">Лаборатория на чудесата</div>
-          <div class="controls">
-            <div class="icon-btn" id="stopBtn" style="display:none;"><i class="bi bi-stop-fill"></i></div>
-            <div class="icon-btn" id="fsBtn"><i class="bi bi-fullscreen"></i></div>
-          </div>
+        <div class="media">
+            <div class="card" id="card">
+                <div class="viewer" id="viewer">
+                    <div class="overlay" id="overlay">
+                        <h2 style="color:white;">Лаборатория на чудесата</h2>
+                        <h3 style="color: white;" id="h3text">Започни игра:</h3>
+                        <div class="start-btn"><i class="bi bi-controller" style="font-size:28px;"></i></div>
+                    </div>
+                    <div class="fullscreen-toolbar" id="fsToolbar">
+                        <div class="icon-btn" id="exitFsBtn"><i class="bi bi-fullscreen-exit"></i></div>
+                        <div class="icon-btn" id="terminateBtn"><i class="bi bi-stop-fill"></i></div>
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <div class="title">Лаборатория на чудесата</div>
+                    <div class="controls">
+                        <div class="icon-btn" id="stopBtn" style="display:none;"><i class="bi bi-stop-fill"></i></div>
+                        <div class="icon-btn" id="fsBtn"><i class="bi bi-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <section id="s3">
-  <div class="section-bg">
-    <div class="text">
-      <h2>За нас</h2>
-      <p>
-        Ние сме Иван Любенов и Александър Минев. Ние сме седми клас в ПЧМГ и имаме интерес към програмирането и създаването на игри уебсайтове. Създадохме
-        тази игра, за да покажем нашите умения и да се забавляваме.
-        <br><br>
-        Започнахме този проект с идеята да създадем нещо красиво и интересно, което да се хареса на хората. Работихме усилено, за да направим играта
-        възможно най-добра и да я направим достъпна за всички. Доволни сме от крайния резултат и не очаквахме да се получи толкова добре. Затова
-        споделяме играта си с Вас и се надяваме, че ще Ви хареса!
-      </p>
+    <div class="section-bg">
+        <div class="text">
+            <h2>За нас</h2>
+            <p>
+                Ние сме Иван Любенов и Александър Минев. Ние сме седми клас в ПЧМГ и имаме интерес към програмирането и създаването на игри уебсайтове. Създадохме
+                тази игра, за да покажем нашите умения и да се забавляваме.
+                <br><br>
+                Започнахме този проект с идеята да създадем нещо красиво и интересно, което да се хареса на хората. Работихме усилено, за да направим играта
+                възможно най-добра и да я направим достъпна за всички. Доволни сме от крайния резултат и не очаквахме да се получи толкова добре. Затова
+                споделяме играта си с Вас и се надяваме, че ще Ви хареса!
+            </p>
+        </div>
+        <div class="media">
+            <img src="assets/aboutUs.png" alt="AboutUS" />
+        </div>
     </div>
-    <div class="media">
-      <img src="assets/aboutUs.png" alt="AboutUS" />
-    </div>
-  </div>
 </section>
 
 <footer style="font-family: Arial !important;">
-  © 2025 — Всички права запазени
+    © 2025 — Всички права запазени
 </footer>
 
 <script>
@@ -441,14 +442,14 @@
             bottomToolbar.style.display = 'none';
             return;
         }
-       
         if (userOS === 'Linux' || userOS === 'iOS') {
             //телефон
             startBtn[0].style.display = 'none';
             fsToolbar.style.display = 'none';
             bottomToolbar.style.display = 'none';
             console.log(h3text)
-            h3text.innerHTML = "Отвори на компютър, за да играеш!"
+            h3text.innerHTML = "Отвори на компютър, за да играеш!";
+            overlay.style.pointerEvents = 'none';
 
         } else {
             //Компютър
@@ -464,7 +465,6 @@
 
 </body>
 </html>
-
 
 
 

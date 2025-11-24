@@ -309,7 +309,7 @@
         <div class="viewer" id="viewer">
           <div class="overlay" id="overlay">
             <h2 style="color:white;">Лаборатория на чудесата</h2>
-              <h3 style="color: white;" id="h3text">Започни игра:</h3>
+              <h3 style="color: white;" id="h">Започни игра:</h3>
             <div class="start-btn"><i class="bi bi-controller" style="font-size:28px;"></i></div>
           </div>
           <div class="fullscreen-toolbar" id="fsToolbar">
@@ -362,8 +362,6 @@
     const terminateBtn = document.getElementById('terminateBtn');
     const card = document.getElementById('card');
     const bottomToolbar = document.querySelector('.toolbar');
-    const h3text = document.getElementById('h3text');
-    const playBtn = document.getElementsByClassName('start-btn');
 
     let iframe = null;
 
@@ -452,9 +450,7 @@
         // Mobile OS => show bottom toolbar as a hint
         if (userOS === 'Android' || userOS === 'iOS') {
             fsToolbar.style.display = 'none';
-            h3text.innerHTML = 'Играй на компютър!'
-            playBtn.style.display = 'none';
-            bottomToolbar.style.display = 'none';
+            bottomToolbar.style.display = 'flex';
         } else {
             // Desktop OS => show bottom toolbar normally
             fsToolbar.style.display = 'none';

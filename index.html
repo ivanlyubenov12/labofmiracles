@@ -9,7 +9,7 @@
   <style>
     @font-face {
       font-family: Handvetica Neue;
-      src: url("assets/Handvetica\ Neue\ Regular\ Trial.ttf") format("truetype");
+      src: url("assets/handvetica_neue.ttf") format("truetype");
     }
     body {
       scroll-behavior: smooth;
@@ -58,8 +58,8 @@
       gap: 40px;
       max-width: 1400px;
       width: 95vw;
-      margin: 120px auto 60px auto;
-      min-height: calc(100vh - 180px);
+      margin: 120px auto 20px auto;
+      max-height: 70vh;
       box-sizing: border-box;
     }
     .text {
@@ -82,7 +82,7 @@
       min-width: 0;
     }
     .media img {
-      height: 360px;
+      height: 300px;
       width: auto;
       object-fit: cover;
       border-radius: 16px;
@@ -128,7 +128,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 5px;
       cursor: pointer;
       background: rgba(0,0,0,0.3);
       z-index: 10;
@@ -226,7 +226,6 @@
       .section-bg {
         border-radius: 16px;
         width: 95vw;
-        max-width: 700px;
         padding: 12px 6vw;
         flex-direction: column;
         align-items: stretch;
@@ -241,7 +240,7 @@
         font-size: 15px;
       }
       .media img {
-        height: 200px;
+        height: 300px;
       }
     }
     @media (max-width: 600px) {
@@ -310,7 +309,8 @@
         <div class="viewer" id="viewer">
           <div class="overlay" id="overlay">
             <h2 style="color:white;">Лаборатория на чудесата</h2>
-            <div class="start-btn"><i class="bi bi-play-fill" style="font-size:28px;"></i></div>
+              <h3 style="color: white;" id="h3text">Започни игра:</h3>
+            <div class="start-btn"><i class="bi bi-controller" style="font-size:28px;"></i></div>
           </div>
           <div class="fullscreen-toolbar" id="fsToolbar">
             <div class="icon-btn" id="exitFsBtn"><i class="bi bi-fullscreen-exit"></i></div>
@@ -353,44 +353,120 @@
 </footer>
 
 <script>
-  const viewer = document.getElementById('viewer');
-  const overlay = document.getElementById('overlay');
-  const stopBtn = document.getElementById('stopBtn');
-  const fsBtn = document.getElementById('fsBtn');
-  const fsToolbar = document.getElementById('fsToolbar');
-  const exitFsBtn = document.getElementById('exitFsBtn');
-  const terminateBtn = document.getElementById('terminateBtn');
-  const card = document.getElementById('card');
-  const bottomToolbar = document.querySelector('.toolbar');
+    const viewer = document.getElementById('viewer');
+    const overlay = document.getElementById('overlay');
+    const stopBtn = document.getElementById('stopBtn');
+    const fsBtn = document.getElementById('fsBtn');
+    const fsToolbar = document.getElementById('fsToolbar');
+    const exitFsBtn = document.getElementById('exitFsBtn');
+    const terminateBtn = document.getElementById('terminateBtn');
+    const card = document.getElementById('card');
+    const bottomToolbar = document.querySelector('.toolbar');
+    const h3text = document.getElementById('h3text');
+    const playBtn = document.getElementsByClassName('start-btn');
 
-  let iframe = null;
+    let iframe = null;
 
-  function createIframe(){
-    iframe = document.createElement('iframe');
-    iframe.src = 'assets/game.html';
-    iframe.style.width = '100%'; iframe.style.height='100%'; iframe.style.border='0';
-    viewer.appendChild(iframe);
-  }
-  function removeIframe(){ if(iframe){ iframe.remove(); iframe=null; }}
+    function createIframe() {
+        iframe = document.createElement('iframe');
+        iframe.src = 'assets/game.html';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = '0';
+        viewer.appendChild(iframe);
+    }
 
-  function startGame(){ if(!iframe) createIframe(); overlay.style.display='none'; stopBtn.style.display='inline-grid'; terminateBtn.style.display='inline-grid'; }
-  function stopGame(){ overlay.style.display='flex'; stopBtn.style.display='none'; terminateBtn.style.display='none'; removeIframe(); exitFullscreen(); }
+    function removeIframe() {
+        if (iframe) {
+            iframe.remove();
+            iframe = null;
+        }
+    }
 
-  function enterFullscreen(){ if(card.requestFullscreen) card.requestFullscreen(); }
-  function exitFullscreen(){ if(document.fullscreenElement) document.exitFullscreen(); }
+    function startGame() {
+        if (!iframe) createIframe();
+        overlay.style.display = 'none';
+        stopBtn.style.display = 'inline-grid';
+        terminateBtn.style.display = 'inline-grid';
+    }
 
-  document.addEventListener('fullscreenchange', ()=>{
-    const fs = document.fullscreenElement !== null;
-    fsToolbar.style.display = fs ? 'flex' : 'none';
-    bottomToolbar.style.display = fs ? 'none' : 'flex';
-  });
+    function stopGame() {
+        overlay.style.display = 'flex';
+        stopBtn.style.display = 'none';
+        terminateBtn.style.display = 'none';
+        removeIframe();
+        exitFullscreen();
+    }
 
-  overlay.addEventListener('click', ()=>{ startGame(); enterFullscreen(); });
-  stopBtn.addEventListener('click', stopGame);
-  fsBtn.addEventListener('click', enterFullscreen);
-  exitFsBtn.addEventListener('click', exitFullscreen);
-  terminateBtn.addEventListener('click', stopGame);
+    function enterFullscreen() {
+        if (card.requestFullscreen) card.requestFullscreen();
+    }
+
+    function exitFullscreen() {
+        if (document.fullscreenElement) document.exitFullscreen();
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+        updateToolbar();
+    });
+
+    overlay.addEventListener('click', () => {
+        startGame();
+        enterFullscreen();
+    });
+    stopBtn.addEventListener('click', stopGame);
+    fsBtn.addEventListener('click', enterFullscreen);
+    exitFsBtn.addEventListener('click', exitFullscreen);
+    terminateBtn.addEventListener('click', stopGame);
+
+    // ═══════════════════════════════════════════════════════
+    // OS Detection
+    // ═══════════════════════════════════════════════════════
+    function getOS() {
+        const platform = navigator.platform.toLowerCase();
+        const ua = navigator.userAgent.toLowerCase();
+
+        if (platform.includes('win')) return 'Windows';
+        if (platform.includes('mac')) return 'macOS';
+        if (platform.includes('linux')) return 'Linux';
+        if (/android/.test(ua)) return 'Android';
+        if (/iphone|ipad|ipod/.test(ua)) return 'iOS';
+        return 'Unknown';
+    }
+
+    const userOS = getOS();
+    console.log('[OS Detection] User OS:', userOS);
+
+    // ═══════════════════════════════════════════════════════
+    // Toolbar / Game Overlay Logic
+    // ═══════════════════════════════════════════════════════
+    function updateToolbar() {
+        const fs = document.fullscreenElement !== null;
+
+        if (fs) {
+            fsToolbar.style.display = 'flex';
+            bottomToolbar.style.display = 'none';
+            return;
+        }
+
+        // Mobile OS => show bottom toolbar as a hint
+        if (userOS === 'Android' || userOS === 'iOS') {
+            fsToolbar.style.display = 'none';
+            h3text.innerHTML = 'Играй на компютър!'
+            playBtn.style.display = 'none';
+            bottomToolbar.style.display = 'none';
+        } else {
+            // Desktop OS => show bottom toolbar normally
+            fsToolbar.style.display = 'none';
+            bottomToolbar.style.display = 'flex';
+        }
+    }
+
+    // Run once at load
+    updateToolbar();
 </script>
+
+
 
 </body>
 </html>
